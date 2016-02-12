@@ -1,0 +1,19 @@
+gitlab:
+  image: gitlab/gitlab-ce
+  container_name: gitlab
+  hostname: gitlab.example.com
+  ports:
+    - "8443:443"
+    - "8080:80"
+    - "8022:22"
+  volumes_from:
+    - gitlab_data
+
+gitlab_data:
+  image: alpine
+  command: /bin/true
+  container_name: gitlab-data
+  volumes:
+    - /etc/gitlab
+    - /var/log/gitlab
+    - /var/opt/gitlab
