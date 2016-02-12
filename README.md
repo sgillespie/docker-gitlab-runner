@@ -27,3 +27,8 @@ Please see LICENSE
 This GitLab Runner was derived from GitLab's Runner container.
 
  * [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/)
+
+## Authors
+
+**Sean Gillespie**
++ [sean@mistersg.net](sean@mistersg.net)
