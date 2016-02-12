@@ -18,3 +18,12 @@ The Docker image can be run directly from Docker Hub
         --environment RUNNER_SHELL=bash \
         --volume=/etc/gitlab-runner:/etc/gitlab-runner
         
+## License
+
+Please see LICENSE
+
+## Acknowledgements
+
+This GitLab Runner was derived from GitLab's Runner container.
+
+ * [GitLab Runner](https://gitlab.com/gitlab-org/gitlab-ci-multi-runner/)
