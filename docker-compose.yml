@@ -23,6 +23,9 @@ gitlab_runner:
   command: "/bin/sh"
   container_name: gitlab-runner
   environment:
+    CI_SERVER_URL: http://gitlab.example.com:80/ci
+    DOCKER_IMAGE: alpine
     REGISTRATION_TOKEN: XXXXXXXXXXXXXX
-    CI_SERVER_URL: http://localhost:8080/ci
     RUNNER_EXECUTOR: docker
+  links:
+    - gitlab:gitlab.example.com
