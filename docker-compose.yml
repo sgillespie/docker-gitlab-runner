@@ -17,3 +17,12 @@ gitlab_data:
     - /etc/gitlab
     - /var/log/gitlab
     - /var/opt/gitlab
+
+gitlab_runner:
+  build: .
+  command: "/bin/sh"
+  container_name: gitlab-runner
+  environment:
+    REGISTRATION_TOKEN: XXXXXXXXXXXXXX
+    CI_SERVER_URL: http://localhost:8080/ci
+    RUNNER_EXECUTOR: docker
