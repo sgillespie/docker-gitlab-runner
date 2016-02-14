@@ -1,6 +1,10 @@
 #!/bin/sh
 
-gitlab-ci-multi-runner register \
-                       --non-interactive
+gitlab-ci-multi-runner register --non-interactive
 
-exit 0
+if [[ "$?" = "0" ]]; then
+    gitlab-ci-multi-runner run \
+                           --user=gitlag-runner \
+                           --working-directory=/home/gitlab-runner \
+                           "$@"
+fi
