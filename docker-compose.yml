@@ -22,10 +22,11 @@ gitlab_runner:
   build: .
   command: "/bin/sh"
   container_name: gitlab-runner
+  env_file:
+    - ./gitlab-runner.env
   environment:
     CI_SERVER_URL: http://gitlab.example.com:80/ci
     DOCKER_IMAGE: alpine
-    REGISTRATION_TOKEN: XXXXXXXXXXXXXX
     RUNNER_EXECUTOR: docker
   links:
     - gitlab:gitlab.example.com
