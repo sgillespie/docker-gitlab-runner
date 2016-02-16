@@ -1,0 +1,5 @@
+stages:
+  - build
+
+build_job:
+  - docker build -t sgillespie/docker-gitlab-runner .
