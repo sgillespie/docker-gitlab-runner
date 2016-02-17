@@ -15,6 +15,7 @@ RUN adduser \
      gitlab-runner
 VOLUME /etc/gitlab-runner /home/gitlab
 
+USER gitlab-runner
 ADD assets/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]

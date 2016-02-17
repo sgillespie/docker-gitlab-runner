@@ -30,3 +30,5 @@ gitlab_runner:
     RUNNER_EXECUTOR: docker
   links:
     - gitlab:gitlab.example.com
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
