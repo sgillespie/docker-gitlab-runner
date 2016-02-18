@@ -24,3 +24,4 @@ VOLUME /etc/gitlab-runner /home/gitlab
 ADD assets/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
+CMD ["run", "--working-directory=/home/gitlab-runner", "--user=gitlab-runner"]
