@@ -1,13 +1,18 @@
-FROM alpine
+FROM ubuntu
 MAINTAINER Sean Gillespie <sean@mistersg.net>
 
-RUN apk update && apk add openssl bash
+# Install curl
+RUN apt-get update && apt-get install -y curl
 
-RUN wget \
-     -O /usr/local/bin/gitlab-ci-multi-runner \
-     "https://gitlab-ci-multi-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-ci-multi-runner-linux-386"
-RUN chmod +x /usr/local/bin/gitlab-ci-multi-runner
+# Add official gitlab repositories to APT
+RUN curl \
+     -L "https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh" \
+     | sudo bash
 
+# Install gitlab-runner
+RUN apt-get install -y gitlab-ci-multi-runner
+
+# Add a gitlab user
 RUN adduser \
      -h /home/gitlab-runner \
      -s /bin/bash \
@@ -15,7 +20,7 @@ RUN adduser \
      gitlab-runner
 VOLUME /etc/gitlab-runner /home/gitlab
 
+# Add the entrypoint
 ADD assets/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
-USER gitlab-runner
 ENTRYPOINT ["/entrypoint.sh"]

@@ -20,7 +20,6 @@ gitlab_data:
 
 gitlab_runner:
   build: .
-  command: "/bin/sh"
   container_name: gitlab-runner
   env_file:
     - ./gitlab-runner.env
