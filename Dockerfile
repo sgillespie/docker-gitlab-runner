@@ -12,12 +12,6 @@ RUN curl \
 # Install gitlab-runner
 RUN apt-get install -y gitlab-ci-multi-runner
 
-# Add a gitlab user
-RUN adduser \
-     -h /home/gitlab-runner \
-     -s /bin/bash \
-     -D \
-     gitlab-runner
 VOLUME /etc/gitlab-runner /home/gitlab
 
 # Add the entrypoint
