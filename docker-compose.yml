@@ -29,6 +29,7 @@ services:
       REGISTRATION_TOKEN: ${REGISTRATION_TOKEN}
       RUNNER_EXECUTOR: docker
       RUNNER_TAG_LIST: docker
+    image: sgillespie/gitlab-runner
     network_mode: bridge
     links:
       - gitlab:gitlab
