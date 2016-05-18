@@ -1,33 +1,36 @@
-gitlab:
-  image: gitlab/gitlab-ce
-  container_name: gitlab
-  hostname: gitlab.example.com
-  ports:
-    - "8443:443"
-    - "8080:80"
-    - "8022:22"
-  volumes_from:
-    - gitlab_data
+version: '2'
 
-gitlab_data:
-  image: alpine
-  command: /bin/true
-  container_name: gitlab-data
-  volumes:
-    - /etc/gitlab
-    - /var/log/gitlab
-    - /var/opt/gitlab
+volumes:
+  gitlab_config:
+  gitlab_data:
+  gitlab_logs:
 
-gitlab_runner:
-  build: .
-  container_name: gitlab-runner
-  env_file:
-    - ./gitlab-runner.env
-  environment:
-    CI_SERVER_URL: http://gitlab.example.com:80/ci
-    DOCKER_IMAGE: alpine
-    RUNNER_EXECUTOR: docker
-  links:
-    - gitlab:gitlab.example.com
-  volumes:
-    - /var/run/docker.sock:/var/run/docker.sock
+services:
+  gitlab:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    hostname: gitlab
+    network_mode: bridge
+    ports:
+      - "443:443"
+      - "80:80"
+      - "9922:22"
+    volumes:
+      - gitlab_config:/etc/gitlab
+      - gitlab_data:/var/opt/gitlab
+      - gitlab_logs:/var/log/gitlab
+        
+  gitlab_runner:
+    build: .
+    container_name: gitlab-runner
+    environment:
+      CI_SERVER_URL: http://gitlab/ci
+      DOCKER_IMAGE: alpine
+      REGISTRATION_TOKEN: ${REGISTRATION_TOKEN}
+      RUNNER_EXECUTOR: docker
+      RUNNER_TAG_LIST: docker
+    network_mode: bridge
+    links:
+      - gitlab:gitlab
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock

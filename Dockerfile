@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y curl
 # Add official gitlab repositories to APT
 RUN curl \
      -L "https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-runner/script.deb.sh" \
-     | sudo bash
+     | bash
 
 # Install gitlab-runner
 RUN apt-get install -y gitlab-ci-multi-runner
