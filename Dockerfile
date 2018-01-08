@@ -1,5 +1,4 @@
 FROM alpine:latest
-MAINTAINER Sean Gillespie <sean@mistersg.net>
 
 # Install curl
 RUN apk update && apk add bash \
@@ -11,9 +10,9 @@ RUN apk update && apk add bash \
 VOLUME /etc/gitlab-runner /home/gitlab-runner
 
 RUN adduser -h /home/gitlab-runner -s /bin/bash -D gitlab-runner
-RUN wget -q -O /usr/local/bin/gitlab-ci-multi-runner \
-  https://gitlab-ci-multi-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-ci-multi-runner-linux-386 && \
-  chmod +x /usr/local/bin/gitlab-ci-multi-runner
+RUN wget -q -O /usr/local/bin/gitlab-runner \
+  https://gitlab-runner-downloads.s3.amazonaws.com/latest/binaries/gitlab-runner-linux-amd64 && \
+  chmod +x /usr/local/bin/gitlab-runner
 
 # Add the entrypoint
 COPY assets/entrypoint.sh /entrypoint.sh
